@@ -1,6 +1,5 @@
-
 /**
- * TYPES FOR CASES/CONSTANTS DATA
+ * TYPES/CONSTANTS FOR CASES DATA
  */
 export const CasesLayout = 'API | Cases';
 
@@ -46,7 +45,6 @@ export type CaseRecord = {
   modId: string;
   portalDataInfo: CasesPeoplePortalInfo[];
 };
-
 
 /**
  * GENERAL FILEMAKER RECORD TYPE
