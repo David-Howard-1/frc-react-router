@@ -1,32 +1,60 @@
-import { getFileMakerRecords } from "server/records";
-import type { Route } from "./+types/list";
-import type { CaseFieldData } from "server/types";
+import type { Route } from './+types/list';
+import { getCasesRecords } from 'server/records/getCases';
+import { NavLink } from 'react-router';
 
 export async function loader() {
   // Load cases from TOP FM server
-  const response = await getFileMakerRecords<CaseFieldData>("API | Cases");
+  const fileMakerRecords = await getCasesRecords();
 
-  return response;
-
-  // const token = await getFmAuthToken();
-  // const token = await authenticate(
-  //   process.env.FILEMAKER_USERNAME || "",
-  //   process.env.FILEMAKER_PASSWORD || ""
-  // );
-
-  // console.log("FM Auth Token: ", token);
+  return fileMakerRecords;
 }
 
 export default function CasesList({ loaderData }: Route.ComponentProps) {
   // Get cases from loader data
-  // const cases = loaderData....
   const data = loaderData;
-  console.log(JSON.stringify(data));
 
   return (
-    <main>
-      <h1>Cases List</h1>
-      <div className='flex flex-col gap-4'>{}</div>
-    </main>
+    <>
+      <div className="flex flex-col">
+        {data.map((record) => {
+          const clientData = record.portalData['api.cases.client'][0];
+          console.log('clientData: ', clientData);
+
+          const { ID, Case_Number, Case_Status, Date } = record.fieldData;
+          const clientName = clientData['cases_People::Name_Last_First_Middle'];
+
+          const formattedAddress = `${clientData['cases_people_Contact_Data::Address']}, ${clientData['cases_people_Contact_Data::City']} ${clientData['cases_people_Contact_Data::State']} ${clientData['cases_people_Contact_Data::Zip']}`;
+
+          return (
+            <NavLink
+              to={`/cases/${ID}`}
+              key={ID}
+              className="flex items-center gap-4 w-full p-2 px-5 odd:bg-gray-100 even:hover:bg-black/5 odd:hover:bg-black/10 active:bg-black/15 transition-all"
+            >
+              <div className="flex flex-col w-28">
+                <span className="font-bold">{Case_Number}</span>
+                <span className="text-gray-400 font-bold text-sm">{Date}</span>
+              </div>
+              <div className="flex flex-col">
+                <span className="">{clientName}</span>
+                <span className="text-gray-400 text-sm">
+                  {/* 123 Test Drive, Birmingham AL, 35242 */}
+                  {formattedAddress}
+                </span>
+              </div>
+              <div className="ml-auto">
+                <span
+                  className={`font-semibold ${
+                    Case_Status === 'Open' ? 'text-green-500' : 'text-gray-600'
+                  }`}
+                >
+                  {Case_Status}
+                </span>
+              </div>
+            </NavLink>
+          );
+        })}
+      </div>
+    </>
   );
 }

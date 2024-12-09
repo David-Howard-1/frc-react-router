@@ -8,9 +8,7 @@ export default function Layout() {
       <Sidebar />
       <main className="w-full">
         <TopNav />
-        <div className="w-fit">
-          <Outlet />
-        </div>
+        <Outlet />
       </main>
     </div>
   );
