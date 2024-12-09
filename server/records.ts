@@ -14,6 +14,6 @@ export async function getFileMakerRecords(layoutName: string) {
     }
   );
 
-  console.log("FileMaker Response: " + response.data);
+  console.log("FileMaker Response: " + JSON.stringify(response.data));
   return response.data.response.data;
 }
