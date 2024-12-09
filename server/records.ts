@@ -1,7 +1,10 @@
 import api from "./api";
 import { authenticate } from "./auth";
+import type { FileMakerRecord } from "./types";
 
-export async function getFileMakerRecords(layoutName: string) {
+export async function getFileMakerRecords<T>(
+  layoutName: string
+): Promise<FileMakerRecord<T>[]> {
   const token = await authenticate(
     process.env.FILEMAKER_USERNAME || "",
     process.env.FILEMAKER_PASSWORD || ""
@@ -14,6 +17,6 @@ export async function getFileMakerRecords(layoutName: string) {
     }
   );
 
-  console.log("FileMaker Response: " + JSON.stringify(response.data));
+  console.log("FileMaker Response Data: " + JSON.stringify(response.data));
   return response.data.response.data;
 }

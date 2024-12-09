@@ -2,6 +2,7 @@ export type CaseFieldData = {
   ID: string;
   Case_Number: string;
   Case_Status: string;
+  Date: string;
   Name_Last_First_Middle: string;
   Street: string;
   City: string;

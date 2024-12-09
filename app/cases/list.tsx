@@ -1,12 +1,10 @@
 import { getFileMakerRecords } from "server/records";
 import type { Route } from "./+types/list";
-import { getFmAuthToken } from "./getFmAuthToken";
-import { authenticate } from "server/auth";
-import type { FileMakerRecord } from "server/types";
+import type { CaseFieldData } from "server/types";
 
 export async function loader() {
   // Load cases from TOP FM server
-  const response = await getFileMakerRecords("API | Cases");
+  const response = await getFileMakerRecords<CaseFieldData>("API | Cases");
 
   return response;
 
