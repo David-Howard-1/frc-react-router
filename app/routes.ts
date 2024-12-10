@@ -12,11 +12,11 @@ export default [
   layout('./layout.tsx', [
     ...prefix('cases', [
       index('cases/list.tsx'),
-      route(':id', 'cases/detail.tsx'),
+      route(':recordId', 'cases/detail.tsx'),
     ]),
     ...prefix('people', [
       index('people/list.tsx'),
-      route(':id', 'people/detail.tsx'),
+      route(':recordId', 'people/detail.tsx'),
     ]),
   ]),
 ] satisfies RouteConfig;

@@ -17,17 +17,16 @@ export default function CasesList({ loaderData }: Route.ComponentProps) {
     <>
       <div className="flex flex-col">
         {data.map((record) => {
-          const clientData = record.portalData['api.cases.client'][0];
-          console.log('clientData: ', clientData);
-
+          const { recordId } = record;
           const { ID, Case_Number, Case_Status, Date } = record.fieldData;
+          const clientData = record.portalData['api.cases.client'][0];
           const clientName = clientData['cases_People::Name_Last_First_Middle'];
 
           const formattedAddress = `${clientData['cases_people_Contact_Data::Address']}, ${clientData['cases_people_Contact_Data::City']} ${clientData['cases_people_Contact_Data::State']} ${clientData['cases_people_Contact_Data::Zip']}`;
 
           return (
             <NavLink
-              to={`/cases/${ID}`}
+              to={`/cases/${recordId}`}
               key={ID}
               className="flex items-center gap-4 w-full p-2 px-5 odd:bg-gray-100 even:hover:bg-black/5 odd:hover:bg-black/10 active:bg-black/15 transition-all"
             >
