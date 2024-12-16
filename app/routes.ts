@@ -18,5 +18,6 @@ export default [
       index('people/list.tsx'),
       route(':recordId', 'people/detail.tsx'),
     ]),
+    route('loading', 'loading.tsx'),
   ]),
 ] satisfies RouteConfig;
