@@ -1,9 +1,9 @@
 /**
  * TYPES/CONSTANTS FOR CASES DATA
  */
-export const CasesLayout = 'API | Cases';
+export const CasesLayout = "API | Cases";
 
-export const CasesPeoplePortal = 'api.cases.client';
+export const CasesPeoplePortal = "api.cases.client";
 
 export type CaseFieldData = {
   ID: string;
@@ -15,22 +15,30 @@ export type CaseFieldData = {
 
 export type CasesPeoplePortalRecord = {
   recordId: string;
-  'cases_People::Name_Last_First_Middle': string;
-  'cases_people_Contact_Data::Address': string;
-  'cases_people_Contact_Data::City': string;
-  'cases_people_Contact_Data::State': string;
-  'cases_people_Contact_Data::Zip': string;
-  'cases_people_Contact_Data::County': string;
-  'cases_people_Contact_Data::Phone': string;
-  'cases_people_Contact_Data::Email': string;
+  "cases_People::Name_Last_First_Middle": string;
+  "cases_people_Contact_Data::Address": string;
+  "cases_people_Contact_Data::City": string;
+  "cases_people_Contact_Data::State": string;
+  "cases_people_Contact_Data::Zip": string;
+  "cases_people_Contact_Data::County": string;
+  "cases_people_Contact_Data::Phone": string;
+  "cases_people_Contact_Data::Email": string;
+  modId: string;
+};
+
+export type CasesProgramsPortalRecord = {
+  recordId: string;
+  "cases_Programs::Program_Name": string;
+  "cases_Programs::Program_Status": string;
   modId: string;
 };
 
 export type CasesPortalData = {
-  'api.cases.client': CasesPeoplePortalRecord[];
+  "api.cases.client": CasesPeoplePortalRecord[];
+  "api.cases.programs": CasesProgramsPortalRecord[];
 };
 
-export type CasesPeoplePortalInfo = {
+export type CasesPortalInfo = {
   portalObjectName: string;
   database: string;
   table: string;
@@ -43,7 +51,7 @@ export type CaseRecord = {
   portalData: CasesPortalData;
   recordId: string;
   modId: string;
-  portalDataInfo: CasesPeoplePortalInfo[];
+  portalDataInfo: CasesPortalInfo[];
 };
 
 /**
